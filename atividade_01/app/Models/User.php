@@ -2,10 +2,10 @@
 
 namespace App\Models;
 
+// use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
-use App\Models\Book; // Importa o modelo Book
 
 class User extends Authenticatable
 {
@@ -44,15 +44,5 @@ class User extends Authenticatable
             'email_verified_at' => 'datetime',
             'password' => 'hashed',
         ];
-    }
-
-    /**
-     * Relacionamento N:N entre User e Book via tabela borrowings.
-     */
-    public function books()
-    {
-        return $this->belongsToMany(Book::class, 'borrowings')
-                    ->withPivot('borrowed_at', 'returned_at')
-                    ->withTimestamps();
     }
 }
